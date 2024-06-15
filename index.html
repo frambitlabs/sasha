@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Site Taken Down</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #e9f5f0;
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+        }
+        img {
+            width: 150px;
+            height: auto;
+            margin-bottom: 20px;
+        }
+        h1 {
+            color: #006837; /* Dark green color */
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        p {
+            color: #005a32; /* Another shade of green */
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        .countdown {
+            font-size: 1.8rem;
+            color: #28a745; /* Light green color */
+            font-weight: bold;
+            margin-top: 20px;
+        }
+        .container {
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 100%;
+        }
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            p {
+                font-size: 1rem;
+            }
+            .countdown {
+                font-size: 1.5rem;
+            }
+        }
+        @media (max-width: 480px) {
+            img {
+                width: 100px;
+            }
+            h1 {
+                font-size: 1.5rem;
+            }
+            p {
+                font-size: 0.9rem;
+            }
+            .countdown {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+    <script>
+        function calculateCountdown(endDate) {
+            const now = new Date().getTime();
+            const timeLeft = endDate - now;
+
+            const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+            return { days, hours, minutes, seconds };
+        }
+
+        function updateCountdown() {
+            const countdownElement = document.getElementById('countdown');
+            const endDate = new Date("July 29, 2024 00:00:00").getTime(); // Adjust the date accordingly
+            const { days, hours, minutes, seconds } = calculateCountdown(endDate);
+
+            countdownElement.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+
+            if (days + hours + minutes + seconds <= 0) {
+                clearInterval(countdownInterval);
+                countdownElement.innerHTML = "Time's up!";
+            }
+        }
+
+        const countdownInterval = setInterval(updateCountdown, 1000);
+    </script>
+</head>
+<body>
+    <div class="container">
+        <img src="frambitlabs.jpg" alt="FramBit Labs Logo">
+        <h1>Site Taken Down</h1>
+        <p>FramBit Labs has taken this site offline due to an outstanding amount owed by <strong>client_name</strong>.</p>
+        <p>Please <a href="mailto:frambitlabs@gmail.com">contact us</a> to resolve this issue.</p>
+        <div class="countdown" id="countdown"></div>
+    </div>
+</body>
+</html>
